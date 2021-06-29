@@ -34,7 +34,7 @@ if(!require(caret)) install.packages("caret")
 library(dplyr)
 library(tidyverse)
 library(kableExtra)
-library(tidyr)
+library(tidyverse)
 library(stringr)
 library(forcats)
 library(ggplot2)
@@ -100,9 +100,27 @@ head(edx) %>%
                  position = "center",
                  font_size = 10,
                  full_width = FALSE)
+
+edx %>% summarize(Users = n_distinct(userId),
+              Movies = n_distinct(movieId)) %>% 
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                 position = "center",
+                 font_size = 10,
+                 full_width = FALSE)
 ```
 
 ## Missing values count
+
+```{r, missing_count, echo=FALSE}
+sapply(edx, function(x) sum(is.na(x))) %>% 
+kable() %>%
+   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                 position = "center",
+                 font_size = 10,
+                 full_width = FALSE)
+                 
+```
 
 ## Feature Engineering
 
